@@ -21,25 +21,32 @@ server.use(teamNamer);
 server.use('/api/hubs', hubsRouter);
 
 
+// server.get('/', async (req, res, next) => {
+//   if(req.headers.name === 'po') {
+//   res.send(`
+//     <h2>Lambda Hubs API</h2>
+//     <p>Welcome ${req.team} to the Lambda Hubs API</p>
+//   `);
+//   } else {
+//     next('any argument will trigger the next error handling middleware')
+//   }
+// });
+
 server.get('/', async (req, res, next) => {
-  if(req.headers.name === 'po') {
   res.send(`
     <h2>Lambda Hubs API</h2>
     <p>Welcome ${req.team} to the Lambda Hubs API</p>
-  `);
-  } else {
-    next('any argument will trigger the next error handling middleware')
-  }
+  `)
 });
 
-server.use(errorHandler)
+// server.use(errorHandler)
 
 
 // implementation
 
-function errorHandler(err, req, res, next) {
-  res.status(400).json({ message: "bad trash panda" })
-}
+// function errorHandler(err, req, res, next) {
+//   res.status(400).json({ message: "bad trash panda" })
+// }
 
 // authorization is a foobar banana property
 function restricted(req, res, next) {
