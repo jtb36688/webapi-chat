@@ -2,6 +2,7 @@ const express = require('express'); // importing a CommonJS module
 const helmet = require('helmet')
 const morgan = require('morgan')
 const config = require('./data/dbConfig.js')
+const { serverTracking } = require("./servertracking.js")
 
 const hubsRouter = require('./hubs/hubs-router.js');
 
@@ -32,11 +33,8 @@ server.use('/api/hubs', hubsRouter);
 //   }
 // });
 
-server.get('/', async (req, res, next) => {
-  res.send(`
-    <h2>Lambda Hubs API</h2>
-    <p>Welcome ${req.team} to the Lambda Hubs API</p>
-  `)
+server.post('/', serverTracking, (req, res) => {
+res.send(req.trackingObject)
 });
 
 // server.use(errorHandler)
